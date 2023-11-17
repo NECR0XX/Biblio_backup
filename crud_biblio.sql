@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Nov-2023 às 18:56
+-- Tempo de geração: 17-Nov-2023 às 17:16
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -30,10 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `emprestimos` (
   `emprestimo_id` int(11) NOT NULL,
   `livro_emprestimo` varchar(255) NOT NULL,
+  `nome_livro` varchar(255) NOT NULL,
   `aluno_emprestimo` varchar(255) NOT NULL,
   `data_emprestimo` date NOT NULL,
   `data_devolucao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `emprestimos`
+--
+
+INSERT INTO `emprestimos` (`emprestimo_id`, `livro_emprestimo`, `nome_livro`, `aluno_emprestimo`, `data_emprestimo`, `data_devolucao`) VALUES
+(73, '10', 'O Pequeno Príncipe	', 'Wesley', '2023-11-17', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -53,9 +61,9 @@ CREATE TABLE `livros` (
 --
 
 INSERT INTO `livros` (`livro_id`, `nome`, `categoria`, `quantidade`) VALUES
-(9, 'Moby Dyck	', 'Ficção	', 3),
-(10, 'O Pequeno Príncipe	', 'Infantil	', 2),
-(11, '7 Desafios para ser Rei', 'Fantasia', 1);
+(10, 'O Pequeno Príncipe	', 'Infantil', 3),
+(11, '7 Desafios para ser Rei	', 'Fantasia	', 2),
+(12, 'Moby Dick	', 'Ficção', 1);
 
 -- --------------------------------------------------------
 
@@ -112,13 +120,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
-  MODIFY `emprestimo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `emprestimo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de tabela `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `users`
