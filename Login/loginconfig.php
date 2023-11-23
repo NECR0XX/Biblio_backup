@@ -36,5 +36,5 @@ if (isset($_POST['email'])) {
 Aqui basicamente está analisando se o nome/email e senha são iguais do banco de dados
 se for entra, tbm há outro sistema de redirecionamento de usuarios,
 se o tipo_usuario for 1 é administrador ou bibliotecario(ADMINS DO SITE)
-se for tipo 2 é usuário normal
+se for tipo 2 é usuário normal*/
 ?>
