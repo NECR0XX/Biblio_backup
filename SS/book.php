@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['devolver'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="Public/Js/script.js"></script>
     <script src="Public/Js/emprestimo.js"></script>
+    <link rel="shortcut icon" href="Public/Assets/_31554896-b491-466e-b129-d77e088c3b0c-removebg-preview.png" type="image/x-icon">
     <title>Lista de Livros</title>
 </head>
 <body>

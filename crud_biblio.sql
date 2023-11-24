@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Nov-2023 às 17:16
+-- Tempo de geração: 24-Nov-2023 às 13:42
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `categoria_livros`
+--
+
+CREATE TABLE `categoria_livros` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `categoria_livros`
+--
+
+INSERT INTO `categoria_livros` (`id`, `nome`) VALUES
+(1, 'Romance'),
+(2, 'Terror'),
+(3, 'Ficção'),
+(4, 'Fantasia');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `emprestimos`
 --
 
@@ -36,13 +57,6 @@ CREATE TABLE `emprestimos` (
   `data_devolucao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Extraindo dados da tabela `emprestimos`
---
-
-INSERT INTO `emprestimos` (`emprestimo_id`, `livro_emprestimo`, `nome_livro`, `aluno_emprestimo`, `data_emprestimo`, `data_devolucao`) VALUES
-(73, '10', 'O Pequeno Príncipe	', 'Wesley', '2023-11-17', '0000-00-00');
-
 -- --------------------------------------------------------
 
 --
@@ -53,17 +67,35 @@ CREATE TABLE `livros` (
   `livro_id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `categoria` varchar(255) NOT NULL,
-  `quantidade` int(11) NOT NULL
+  `quantidade` int(11) NOT NULL,
+  `imagem` varchar(255) NOT NULL,
+  `categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `livros`
 --
 
-INSERT INTO `livros` (`livro_id`, `nome`, `categoria`, `quantidade`) VALUES
-(10, 'O Pequeno Príncipe	', 'Infantil', 3),
-(11, '7 Desafios para ser Rei	', 'Fantasia	', 2),
-(12, 'Moby Dick	', 'Ficção', 1);
+INSERT INTO `livros` (`livro_id`, `nome`, `categoria`, `quantidade`, `imagem`, `categoria_id`) VALUES
+(19, 'Moby Dick', 'Ficção', 4, '../uploads/moby dick.jpg', 3),
+(20, '7 Desafios Para Ser Rei', 'Fantasia', 2, '../uploads/7 desafios.png', 4),
+(22, 'A 5 Passos de você', 'Romance', 3, '../uploads/a5passos.jpg', 1),
+(23, 'Como eu era antes de você', 'Romance', 1, '../uploads/como eu era.webp', 1),
+(24, 'Confissões de uma garota excluída, mal-amada e (um pouco) dramática ', 'Romance', 2, '../uploads/14-confissoes.jpg', 1),
+(25, 'O feiticeiro de terramar', 'Fantasia', 4, '../uploads/feiticeiro.webp', 4),
+(26, 'Conjurador: O aprendiz', 'Fantasia', 3, '../uploads/conjurador.jpg', 4),
+(27, 'Prince of thorns', 'Fantasia', 4, '../uploads/prince.png', 4),
+(28, 'O hobbit', 'Fantasia', 1, '../uploads/hobbit_amazon.jpg', 4),
+(29, 'Jogador Nº1', 'Ficção', 5, '../uploads/jogador-numero-1--foto-1.jpg', 3),
+(30, 'Neuromancer', 'Ficção', 1, '../uploads/neuromancer.jpg', 3),
+(31, 'Dimensão Sci-fi', 'Ficção', 3, '../uploads/dimensão.jpg', 3),
+(32, 'Contos intergalácticos ', 'Ficção', 4, '../uploads/contos intergalaticos.jpg', 3),
+(33, 'O vilarejo', 'Terror', 2, '../uploads/vilarejo.jpg', 2),
+(34, 'Bird box', 'Terror', 3, '../uploads/bIRD.webp', 2),
+(35, 'O livro maldito', 'Terror', 2, '../uploads/livro.webp', 2),
+(36, 'Amigo Imaginário ', 'Terror', 1, '../uploads/Amigo.jpg', 2),
+(37, 'Cemitério Maldito', 'Terror', 2, '../uploads/cemiterio.jpg', 2),
+(39, 'A culpa é das estrelas', 'Romance', 3, '../uploads/a culpa é das estrelas.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -95,6 +127,12 @@ INSERT INTO `users` (`id`, `nome`, `email`, `senha`, `tipo_usuario`) VALUES
 --
 
 --
+-- Índices para tabela `categoria_livros`
+--
+ALTER TABLE `categoria_livros`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
@@ -104,7 +142,8 @@ ALTER TABLE `emprestimos`
 -- Índices para tabela `livros`
 --
 ALTER TABLE `livros`
-  ADD PRIMARY KEY (`livro_id`);
+  ADD PRIMARY KEY (`livro_id`),
+  ADD KEY `livro_categoria_id_FK` (`categoria_id`);
 
 --
 -- Índices para tabela `users`
@@ -117,22 +156,38 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de tabela `categoria_livros`
+--
+ALTER TABLE `categoria_livros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `emprestimos`
 --
 ALTER TABLE `emprestimos`
-  MODIFY `emprestimo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `emprestimo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `livro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `livros`
+--
+ALTER TABLE `livros`
+  ADD CONSTRAINT `livro_categoria_id_FK` FOREIGN KEY (`categoria_id`) REFERENCES `categoria_livros` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
