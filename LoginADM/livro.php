@@ -19,35 +19,68 @@ if (isset($_POST['nome']) &&
     $livroController->criarLivro($_POST['nome'], $_POST['categoria'], $_POST['quantidade'], $imagem, $_POST['categoria_id']);
     header('Location: #');
 }
+
+// Atualiza Livro
+if (isset($_POST['livro_id']) && isset($_POST['atualizar_nome']) && isset($_POST['atualizar_categoria']) && isset($_POST['atualizar_quantidade'])) {
+    $livroController->atualizarLivro($_POST['livro_id'], $_POST['atualizar_nome'], $_POST['atualizar_categoria'], $_POST['atualizar_quantidade']);
+}
+
+// Excluir Livro
+if (isset($_POST['excluir_livro_id'])) {
+    $livroController->excluirLivro($_POST['excluir_livro_id']);
+}
+
 $livros = $livroController->listarLivros();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Public/Css/style.css">
-    <link rel="shortcut icon" href="Public/Assets/_31554896-b491-466e-b129-d77e088c3b0c-removebg-preview.png" type="image/x-icon">
-    <title>Livros</title>
+    <title>CRUD com MVC e PDO</title>
 </head>
 <body>
-    <header>
-        <a href="index.php">Voltar</a>
-        <h1>Livros</h1>
-    </header>
-    
-    <form action="livro.php" method="post" enctype="multipart/form-data">
+    <a href="index.php">Voltar</a>
+    <h1>Livros</h1>
+    <form method="post">
         <input type="text" name="nome" placeholder="Nome" required>
         <input type="text" name="categoria" placeholder="Categoria" required>
-        <input type="number" name="quantidade" placeholder="Qntd De Livros" min="1" max="5" required>
-        <input type="file" name="imagem" accept="image/*" required>
-        <input type="number" name="categoria_id" required placeholder="Categoria_id">
+        <input type="number" name="quantidade" placeholder="Qntd De Livros" min="1" max="3" required>
         <button type="submit">Adicionar Livro</button>
     </form>
 
-    <?php
-        $livroController->exibirListaLivros();
-    ?>
+    <h2>Lista de Livros</h2>
+    <ul>
+        <?php foreach ($livros as $livro): ?>
+            <li><?php echo $livro['nome']; ?> - <?php echo $livro['categoria']; ?></li>
+        <?php endforeach; ?>
+    </ul>
+
+<?php
+$livroController->exibirListaLivros();
+?>
+
+<h2>Atualizar Livro</h2>
+    <form method="post">
+        <select name="livro_id">
+        <?php foreach ($livros as $livro): ?>
+                                <option value="<?php echo $livro['livro_id']; ?>"><?php echo $livro['livro_id']; ?></option>
+                                <?php endforeach; ?>
+        </select>
+                <input type="text" name="atualizar_nome" placeholder="Novo Nome" required>
+                <input type="text" name="atualizar_categoria" placeholder="Nova categoria" required>
+                <input type="number" name="atualizar_quantidade" placeholder="Nova qntd De Livros" min="1" max="3" required>
+        <button type="submit">Atualizar Livro</button>
+    </form>
+
+    <h2>Excluir Livro</h2>
+    <form method="post">
+        <select name="excluir_livro_id">
+            <?php foreach ($livros as $livro): ?>
+                <option value="<?php echo $livro['livro_id']; ?>"><?php echo $livro['nome']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Excluir Livro</button>
+    </form>
 </body>
 </html>
