@@ -21,19 +21,5 @@ class LivroModel {
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Model para atualizar Livros
-    public function atualizarLivro($livro_id, $nome, $categoria, $quantidade, $imagem, $categoria_id){
-        $sql = "UPDATE livros SET nome = ?, categoria = ?, quantidade = ?, imagem = ?, categoria_id = ? WHERE livro_id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nome, $categoria, $quantidade, $livro_id, $imagem, $categoria_id]);
-    }
-    
-    // Model para deletar Livro
-    public function excluirLivro($livro_id) {
-        $sql = "DELETE FROM livros WHERE livro_id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$livro_id]);
-    }
 }
 ?>

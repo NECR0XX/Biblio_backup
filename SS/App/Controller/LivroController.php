@@ -13,5 +13,9 @@ class LivroController {
     public function listarLivros() {
         return $this->livroModel->listarLivros();
     }
+    public function listarLivrosPorCategoria($categoria_livros) {
+        $livros = $this->livroModel->listarLivrosPorCategoria($categoria_livros);
+        return $livros;
+    }
 }
 ?>

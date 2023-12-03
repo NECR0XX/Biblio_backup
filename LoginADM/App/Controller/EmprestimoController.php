@@ -28,5 +28,9 @@ class EmprestimoController {
     public function listarLivrosEmprestados($usuarioNome) {
         return $this->emprestimoModel->listarLivrosEmprestados($usuarioNome);
     }
+    public function listarHistorico() {
+        return $this->emprestimoModel->listarHistorico();
+    }
+    
 }
 ?>

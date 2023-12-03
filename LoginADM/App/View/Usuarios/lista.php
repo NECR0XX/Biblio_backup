@@ -28,6 +28,7 @@
                 <?php endforeach; ?>
                 <tbody>
             </table>
+            <a href="historico.php">Historico</a>
     </fieldset>
 </body>
 </html>

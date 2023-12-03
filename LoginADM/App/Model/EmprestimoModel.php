@@ -42,8 +42,10 @@ class EmprestimoModel {
                 $novaQuantidade = $livro['quantidade'] + 1;
                 $this->atualizarQuantidade($livroID, $novaQuantidade);
 
+                // Adicionar o código para inserir no histórico
                 $this->registrarHistorico($emprestimoID, $livroID, $livroNome, $usuarioNome);
 
+                // Remover o empréstimo da tabela emprestimos
                 $excluirEmprestimo = $this->pdo->prepare("DELETE FROM emprestimos WHERE emprestimo_id = ?");
                 $excluirEmprestimo->execute([$emprestimoID]);
 
@@ -68,7 +70,13 @@ class EmprestimoModel {
         $inserirHistorico = $this->pdo->prepare("INSERT INTO historico (emprestimo_id, livro_id, nome_livro, nome_aluno) VALUES (?, ?, ?, ?)");
         $inserirHistorico->execute([$emprestimoID, $livroID, $nomeLivro, $nomeUsuario]);
         $dataRegistrada = $this->pdo->query("SELECT hora FROM historico WHERE emprestimo_id = $emprestimoID")->fetchColumn();
+    }  
+    public function listarHistorico() {
+        $sql = "SELECT * FROM historico";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     
 }
 ?>

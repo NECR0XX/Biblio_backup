@@ -28,54 +28,54 @@ $users = $userController->listarUsers();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>CRUD com MVC e PDO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Public/Css/style2.css">
+    <link rel="shortcut icon" href="Public/Assets/_31554896-b491-466e-b129-d77e088c3b0c-removebg-preview.png" type="image/x-icon">
+    <title>Usuários</title>
 </head>
 <body>
-    <a href="index.php">Voltar</a>
-    <h1>Users</h1>
+    <header>
+        <a href="index.php">Voltar</a>
+        <h1>Usuários</h1>
+    </header>
+
     <form method="post">
         <input type="text" name="nome" placeholder="Nome Usuário" required>
         <input type="text" name="email" placeholder="E-mail" required>
         <input type="password" name="senha" placeholder="Senha" required>
-        <input type="number" name="tipo_usuario" placeholder="Nível de Permissão" >
-        <button type="submit">Adicionar User</button>
+        <input type="number" name="tipo_usuario" placeholder="Nível de Permissão">
+        <button type="submit">Adicionar Usuário</button>
     </form>
 
-    <h2>Lista de Users</h2>
-    <ul>
-        <?php foreach ($users as $user): ?>
-            <li><?php echo $user['nome']; ?> - <?php echo $user['email']; ?> - <?php echo $user['senha']; ?> - <?php echo $user['tipo_usuario']; ?></li>
-        <?php endforeach; ?>
-    </ul>
+    <?php
+        $userController->exibirListaUsers();
+    ?>
 
-<?php
-$userController->exibirListaUsers();
-?>
-
-<h2>Atualizar User</h2>
+    <h2>Atualizar Usuário</h2>
     <form method="post">
         <select name="id">
-        <?php foreach ($users as $user): ?>
-                                <option value="<?php echo $user['id']; ?>"><?php echo $user['id']; ?></option>
-                                <?php endforeach; ?>
+            <?php foreach ($users as $user): ?>
+                <option value="<?php echo $user['id']; ?>"><?php echo $user['id']; ?></option>
+            <?php endforeach; ?>
         </select>
-                <input type="text" name="atualizar_nome" placeholder="Novo Nome" required>
-                <input type="text" name="atualizar_email" placeholder="Nova E-mail" required>
-                <input type="password" name="atualizar_senha" placeholder="Nova Senha" required>
-                <input type="number" name="atualizar_tipo_usuario" placeholder="Novo nível de Permissão" required>
-        <button type="submit">Atualizar User</button>
+        <input type="text" name="atualizar_nome" placeholder="Novo Nome" required>
+        <input type="text" name="atualizar_email" placeholder="Novo E-mail" required>
+        <input type="password" name="atualizar_senha" placeholder="Nova Senha" required>
+        <input type="number" name="atualizar_tipo_usuario" placeholder="Novo Nível de Permissão" required>
+        <button type="submit">Atualizar Usuário</button>
     </form>
 
-    <h2>Excluir User</h2>
+    <h2>Excluir Usuário</h2>
     <form method="post">
         <select name="excluir_id">
             <?php foreach ($users as $user): ?>
                 <option value="<?php echo $user['id']; ?>"><?php echo $user['nome']; ?></option>
             <?php endforeach; ?>
         </select>
-        <button type="submit">Excluir User</button>
+        <button type="submit">Excluir Usuário</button>
     </form>
 </body>
 </html>

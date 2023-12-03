@@ -86,21 +86,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['devolver'])) {
     </ul>
         <button id="log" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon></button></div>
     </header>
-
     <section>
-        <a href="romance.php">
-            Romance
-        </a><br>
-        <a href="terror.php">
-            Terror
-        </a><br>
-        <a href="ficcao.php">
-            Ficção
-        </a><br>
-        <a href="fantasia.php">
-            Fantasia
-        </a>
+            <?php foreach ($livrosPorCategoria as $categoria => $livrosNaCategoria): ?>
+                    <h2><?php echo $categoria; ?></h2><br>
+                    <ul>
+                        <?php foreach ($livrosNaCategoria as $livro): ?>
+                            <li>
+                                    <?php
+                                    if (!empty($livro['imagem'])) {
+                                        echo '<img src="' . $livro['imagem'] . '" alt="Imagem do Livro" width="100">';
+                                    } else {
+                                        echo 'Sem Imagem';
+                                    }
+                                    ?>
+                                    <?php echo $livro['nome']; ?><br>
+                                    <strong><?php echo $livro['quantidade']; ?> Livro(s)</strong> Disponíveis
+                                    <form method="post" action="book.php">
+                                        <input type="hidden" name="livro_id" value="<?php echo $livro['livro_id']; ?>">
+                                        <input type="hidden" name="nome" value="<?php echo $livro['nome']; ?>">
+                                        <button type="submit" name="emprestar">Emprestar</button>
+                                    </form>
+                                
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                
+            <?php endforeach; ?>
+    
     </section>
-
 </body>
 </html>
